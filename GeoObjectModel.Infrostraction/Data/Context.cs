@@ -19,29 +19,40 @@ namespace GeoObjectModel.Infrostraction
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
-           /* modelBuilder.Entity<ParentChildObjectLink>()
-                .HasOne(l => l.GeographicalObjectParent)
-                .WithMany(a => a.ParentGeographicalObjects)
-                .HasForeignKey(k => k.GeographicalObjectParentId)
-                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<ParentChildObjectLink>()
-                .HasOne(l => l.GeographicalObjectChild)
-                .WithMany(a => a.ChildGeographicalObjects)
+            /* modelBuilder.Entity<ParentChildObjectLink>()
+                 .HasOne(l => l.GeographicalObjectParent)
+                 .WithMany(a => a.ParentGeographicalObjects)
+                 .HasForeignKey(k => k.GeographicalObjectParentId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+             modelBuilder.Entity<ParentChildObjectLink>()
+                 .HasOne(l => l.GeographicalObjectChild)
+                 .WithMany(a => a.ChildGeographicalObjects)
+                 .HasForeignKey(k => k.GeographicalObjectChildId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+             modelBuilder.Entity<ParentChildObjectLink>()
+                 .HasOne(l => l.GeographicalObjectChild)
+                 .WithMany(a => a.ChildGeographicalObjects)
+                 .HasForeignKey(k => k.GeographicalObjectParentId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+             modelBuilder.Entity<ParentChildObjectLink>()
+                 .HasOne(l => l.GeographicalObjectParent)
+                 .WithMany(a => a.ParentGeographicalObjects)
                 .HasForeignKey(k => k.GeographicalObjectChildId)
-                .OnDelete(DeleteBehavior.Restrict);*/
-
-            modelBuilder.Entity<ParentChildObjectLink>()
-                .HasOne(l => l.GeographicalObjectChild)
-                .WithMany(a => a.ChildGeographicalObjects)
-                .HasForeignKey(k => k.GeographicalObjectParentId)
+                 .OnDelete(DeleteBehavior.Restrict);*/
+            modelBuilder.Entity<GeographicalObject>()
+                .HasMany(l => l.ChildGeographicalObjects)
+                .WithOne(o => o.GeographicalObjectParent)
+                .HasForeignKey(fk => fk.GeographicalObjectParentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<ParentChildObjectLink>()
-                .HasOne(l => l.GeographicalObjectParent)
-                .WithMany(a => a.ParentGeographicalObjects)
-               // .HasForeignKey(k => k.GeographicalObjectChildId)
+            modelBuilder.Entity<GeographicalObject>()
+                .HasMany(l => l.ParentGeographicalObjects)
+                .WithOne(o => o.GeographicalObjectChild)
+                .HasForeignKey(fk => fk.GeographicalObjectChildId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<NeighboringObjectLink>()

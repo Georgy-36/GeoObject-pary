@@ -81,7 +81,7 @@ namespace TestProject1
             geographicalObject.ChildGeographicalObjects.Add(childObjectLink1);
             
             geoObjectRepository.AddAsync(geographicalObject).Wait();
-            childObjectLink1.GeographicalObjectChild.GeoNameId = 111;
+            //childObjectLink1.GeographicalObjectChild.GeoNameId = 111;
 
             Assert.NotNull(geoObjectRepository.GetByIdAsync(child1Id));
             Assert.Equal(geoObjectId, geoObjectRepository.GetByIdAsync(geoObjectId).Result.Id);
