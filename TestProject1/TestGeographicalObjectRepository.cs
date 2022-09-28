@@ -19,11 +19,11 @@ namespace TestProject1
             GeographicalObject geographicalObject = new GeographicalObject();
             Guid geoObjectId = Guid.NewGuid();
             geographicalObject.Id = geoObjectId;
-           // geographicalObject.GeoNameId = 333;
+            geographicalObject.GeoNameId = 111;
             geographicalObject.UpdatedTime = DateTime.Now;
             geographicalObject.CreationTime = DateTime.Now;
 
-            Guid guidVersion1 = Guid.NewGuid();
+            /*Guid guidVersion1 = Guid.NewGuid();
             GeographicalObjectVersion geographicalObjectVersion1 = new GeographicalObjectVersion();
             geographicalObjectVersion1.Id = guidVersion1;
             geographicalObjectVersion1.FullName = "A1";
@@ -51,13 +51,13 @@ namespace TestProject1
             geographicalObjectVersion2.UpdateTime = DateTime.Now;
             geographicalObjectVersion2.CreationTime = DateTime.Now;
             geographicalObjectVersion2.CommonInfo = "CI2";
-            geographicalObjectVersion2.Version = 2;
+            geographicalObjectVersion2.Version = 2;*/
 
 
             GeographicalObject childObject1 = new GeographicalObject();
             Guid child1Id = new Guid("00000000-0001-0000-0000-000000000000");
             childObject1.Id = child1Id;
-            childObject1.GeoNameId = 111;
+            childObject1.GeoNameId = 222;
             
 
             geoObjectRepository.AddAsync(childObject1).Wait();
@@ -75,20 +75,19 @@ namespace TestProject1
             childObjectLink1.GeographicalObjectParent = geographicalObject;
             
 
-            geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion1);
-            geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion2);
+            //geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion1);
+            //geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion2);
             
             geographicalObject.ChildGeographicalObjects.Add(childObjectLink1);
             
             geoObjectRepository.AddAsync(geographicalObject).Wait();
-            //childObjectLink1.GeographicalObjectChild.GeoNameId = 111;
 
             Assert.NotNull(geoObjectRepository.GetByIdAsync(child1Id));
             Assert.Equal(geoObjectId, geoObjectRepository.GetByIdAsync(geoObjectId).Result.Id);
             Assert.Equal(child1Id, geoObjectRepository.GetByIdAsync(child1Id).Result.Id);
             Assert.Equal(30.0, geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].IncludedPercent);
             Assert.Equal(new Guid("00000000-0002-0000-0000-000000000000"), geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].Id);
-            Assert.Equal(111, geoObjectRepository.GetByIdAsync(geoObjectId).Result.GeoNameId);
+            Assert.Equal(222, geoObjectRepository.GetByIdAsync(child1Id).Result.GeoNameId);
             
         }
     }
