@@ -87,7 +87,7 @@ namespace TestProject1
             Assert.Equal(child1Id, geoObjectRepository.GetByIdAsync(child1Id).Result.Id);
             Assert.Equal(30.0, geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].IncludedPercent);
             Assert.Equal(new Guid("00000000-0002-0000-0000-000000000000"), geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].Id);
-            Assert.Equal(222, geoObjectRepository.GetByIdAsync(child1Id).Result.GeoNameId);
+            Assert.Equal(111, geoObjectRepository.GetByIdAsync(child1Id).Result.GeoNameId);
             
         }
     }

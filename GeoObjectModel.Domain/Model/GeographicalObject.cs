@@ -63,7 +63,10 @@ namespace GeoObjectModel.Domain
         public List<ParentChildObjectLink> ChildGeographicalObjects { get; set; } = new List<ParentChildObjectLink>();
         public List<NeighboringObjectLink> NeighboringGeographicalObjectsOut { get; set; } = new List<NeighboringObjectLink>();
         public List<NeighboringObjectLink> NeighboringGeographicalObjectsIn { get; set; } = new List<NeighboringObjectLink>();
-      
+        public NeighboringObjectLink NeighboringObjectA { get; set; } = null;
+        public NeighboringObjectLink NeighboringObjectB { get; set; } = null;
+
+
 
     }
 }
