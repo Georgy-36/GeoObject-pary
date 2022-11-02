@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using GeoObjectModel.Domain;
+using System.Diagnostics;
 
 namespace TestProject1
 {
@@ -73,22 +74,31 @@ namespace TestProject1
             childObjectLink1.GeographicalObjectChildId = new Guid("00000000-0001-0000-0000-000000000000");
             childObjectLink1.GeographicalObjectChild = childObject1;
             childObjectLink1.GeographicalObjectParent = geographicalObject;
-            
+
 
             //geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion1);
             //geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion2);
-            
+
+            NeighboringObject NeighboringObjectA = new NeighboringObject();
+            NeighboringObjectA.Id = new Guid("00000000-0000-0000-0000-000000000001");
+            Guid NeighborningGeographicalObjectAId = new Guid("00000000-0000-0000-0000-000000000002");
+            NeighboringObjectLink NeighboringObjectlinkA = new NeighboringObjectLink();
+            NeighboringObjectlinkA.Id = new Guid("00000000-0000-0000-0000-000000000011");
+            NeighboringObject NeighboringObjectB = new NeighboringObject();
+            Guid NeighborningGeographicalObjectBId = new Guid("00000000-0000-0000-0000-000000000022");
+
+
             geographicalObject.ChildGeographicalObjects.Add(childObjectLink1);
             
             geoObjectRepository.AddAsync(geographicalObject).Wait();
 
-            Assert.NotNull(geoObjectRepository.GetByIdAsync(child1Id));
-            Assert.Equal(geoObjectId, geoObjectRepository.GetByIdAsync(geoObjectId).Result.Id);
-            Assert.Equal(child1Id, geoObjectRepository.GetByIdAsync(child1Id).Result.Id);
-            Assert.Equal(30.0, geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].IncludedPercent);
-            Assert.Equal(new Guid("00000000-0002-0000-0000-000000000000"), geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].Id);
-            Assert.Equal(111, geoObjectRepository.GetByIdAsync(child1Id).Result.GeoNameId);
-            
+            //Assert.NotNull(geoObjectRepository.GetByIdAsync(child1Id));
+            //Assert.Equal(geoObjectId, geoObjectRepository.GetByIdAsync(geoObjectId).Result.Id);
+            //Assert.Equal(child1Id, geoObjectRepository.GetByIdAsync(child1Id).Result.Id);
+            //Assert.Equal(30.0, geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].IncludedPercent);
+            //Assert.Equal(new Guid("00000000-0002-0000-0000-000000000000"), geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].Id);
+            //Assert.Equal(222, geoObjectRepository.GetByIdAsync(child1Id).Result.GeoNameId
+            Assert.Equal(new Guid("00000000-0000-0000-0000-000000000001"), geoObjectRepository.GetByIdAsync(NeighborningGeographicalObjectAId).Result.Id);
         }
     }
 }

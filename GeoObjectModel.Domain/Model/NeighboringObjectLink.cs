@@ -22,12 +22,12 @@ namespace GeoObjectModel.Domain
         public DateTime CreationDateTime { get; set; }
         public DateTime LastUpdatedDateTime { get; set; }
         public Guid NeighboringGeographicalObjectsOutId { get; set; }
-        public GeographicalObject NeighboringGeographicalObjectsOut { get; set; }
+        public GeographicalObject NeighboringGeographicalObjectsOut { get; set; } = null!;
         public Guid NeighboringGeographicalObjectsInId { get; set; }
-        public GeographicalObject NeighboringGeographicalObjectsIn { get; set; }
-        public GeographicalObject NeighborningGeographicalObjectsLinkA { get; set; }
+        public GeographicalObject NeighboringGeographicalObjectsIn { get; set; } = null!;
+        public GeographicalObject NeighborningGeographicalObjectsLinkA { get; set; } = null!;
         public Guid NeighboringGeographicalObjectAId { get; set; }
-        public GeographicalObject NeighborningGeographicalObjectsLinkB { get; set; }
+        public GeographicalObject NeighborningGeographicalObjectsLinkB { get; set; } = null!;
         public Guid NeighboringGeographicalObjectBId { get; set; }
 
 

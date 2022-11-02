@@ -69,12 +69,14 @@ namespace GeoObjectModel.Infrostraction
 
             modelBuilder.Entity<NeighboringObjectLink>()
                 .HasOne(l => l.NeighborningGeographicalObjectsLinkA)
-                .WithOne(a => a.NeighboringObjectA)
+                .WithOne(a => a.NeighboringObjectB)
+                .HasForeignKey<NeighboringObjectLink>(k => k.NeighboringGeographicalObjectAId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<NeighboringObjectLink>()
                 .HasOne(l => l.NeighborningGeographicalObjectsLinkB)
-                .WithOne(a => a.NeighboringObjectB)
+                .WithOne(a => a.NeighboringObjectA)
+                .HasForeignKey<NeighboringObjectLink>(k => k.NeighboringGeographicalObjectBId)
                 .OnDelete(DeleteBehavior.Restrict);
 
                 
