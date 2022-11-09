@@ -19,30 +19,6 @@ namespace GeoObjectModel.Infrostraction
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            /* modelBuilder.Entity<ParentChildObjectLink>()
-                 .HasOne(l => l.GeographicalObjectParent)
-                 .WithMany(a => a.ParentGeographicalObjects)
-                 .HasForeignKey(k => k.GeographicalObjectParentId)
-                 .OnDelete(DeleteBehavior.Restrict);
-
-             modelBuilder.Entity<ParentChildObjectLink>()
-                 .HasOne(l => l.GeographicalObjectChild)
-                 .WithMany(a => a.ChildGeographicalObjects)
-                 .HasForeignKey(k => k.GeographicalObjectChildId)
-                 .OnDelete(DeleteBehavior.Restrict);
-
-             modelBuilder.Entity<ParentChildObjectLink>()
-                 .HasOne(l => l.GeographicalObjectChild)
-                 .WithMany(a => a.ChildGeographicalObjects)
-                 .HasForeignKey(k => k.GeographicalObjectParentId)
-                 .OnDelete(DeleteBehavior.Restrict);
-
-             modelBuilder.Entity<ParentChildObjectLink>()
-                 .HasOne(l => l.GeographicalObjectParent)
-                 .WithMany(a => a.ParentGeographicalObjects)
-                .HasForeignKey(k => k.GeographicalObjectChildId)
-                 .OnDelete(DeleteBehavior.Restrict);*/
             modelBuilder.Entity<GeographicalObject>()
                 .HasMany(l => l.ChildGeographicalObjects)
                 .WithOne(o => o.GeographicalObjectParent)
