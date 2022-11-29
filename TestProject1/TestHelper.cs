@@ -34,5 +34,7 @@ namespace TestProject1
                 return new GeographicalObjectRepository(_context);
             }
         }
+        
+
     }
 }

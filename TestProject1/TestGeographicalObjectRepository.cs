@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xunit;
 using GeoObjectModel.Domain;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 
 namespace TestProject1
 {
@@ -13,7 +14,7 @@ namespace TestProject1
     {
         [Fact]
 
-        public void TestAdd()
+        public void TestParentChild()
         {
             var testHelper = new TestHelper();
             var geoObjectRepository = testHelper.GeographicalObjectRepository;
@@ -54,7 +55,6 @@ namespace TestProject1
             geographicalObjectVersion2.CommonInfo = "CI2";
             geographicalObjectVersion2.Version = 2;
 
-
             GeographicalObject childObject1 = new GeographicalObject();
             Guid child1Id = new Guid("00000000-0001-0000-0000-000000000000");
             childObject1.Id = child1Id;
@@ -74,20 +74,8 @@ namespace TestProject1
             childObjectLink1.GeographicalObjectChildId = new Guid("00000000-0001-0000-0000-000000000000");
             childObjectLink1.GeographicalObjectChild = childObject1;
             childObjectLink1.GeographicalObjectParent = geographicalObject;
-
-
             geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion1);
             geographicalObject.GeographicalObjectVersions.Add(geographicalObjectVersion2);
-
-            NeighboringObject NeighboringObjectA = new NeighboringObject();
-            NeighboringObjectA.Id = new Guid("00000000-0000-0000-0000-000000000001");
-            Guid NeighborningGeographicalObjectAId = new Guid("00000000-0000-0000-0000-000000000002");
-            NeighboringObjectLink NeighboringObjectlinkA = new NeighboringObjectLink();
-            NeighboringObjectlinkA.Id = new Guid("00000000-0000-0000-0000-000000000011");
-            NeighboringObject NeighboringObjectB = new NeighboringObject();
-            Guid NeighborningGeographicalObjectBId = new Guid("00000000-0000-0000-0000-000000000022");
-
-
             geographicalObject.ChildGeographicalObjects.Add(childObjectLink1);
             
             geoObjectRepository.AddAsync(geographicalObject).Wait();
@@ -98,7 +86,33 @@ namespace TestProject1
             Assert.Equal(30.0, geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].IncludedPercent);
             Assert.Equal(new Guid("00000000-0002-0000-0000-000000000000"), geoObjectRepository.GetByIdAsync(geoObjectId).Result.ChildGeographicalObjects[0].Id);
             Assert.Equal(222, geoObjectRepository.GetByIdAsync(child1Id).Result.GeoNameId);
+        }
+
+        [Fact]  
+        public void TestNeighborings()
+        {
+            var testHelper = new TestHelper();
+            var NeighboringObjectRepository = testHelper.GeographicalObjectRepository;
+            NeighboringObject NeighboringObjectA = new NeighboringObject();
+            NeighboringObjectA.Id = new Guid("00000000-0000-0000-0000-000000000001");
+            Guid NeighborningGeographicalObjectAId = new Guid("00000000-0000-0000-0000-000000000002");
+
+            NeighboringObjectLink NeighboringObjectlinkA = new NeighboringObjectLink();
+            NeighboringObjectlinkA.Id = new Guid("00000000-0000-0000-0000-000000000011");
+
+            NeighboringObjectLink NeighboringObjectlinkB = new NeighboringObjectLink();
+            NeighboringObjectlinkA.Id = new Guid("00000000-0000-0000-0000-000000000012");
+
+            NeighboringObject NeighboringObjectB = new NeighboringObject();
+            Guid NeighborningGeographicalObjectBId = new Guid("00000000-0000-0000-0000-000000000022");
+
+            NeighboringObjectA.NeighboringObjectLinks.Add(NeighboringObjectlinkB);
+
+            Assert.NotNull(NeighboringObjectA);
             Assert.Equal(new Guid("00000000-0000-0000-0000-000000000022"), NeighborningGeographicalObjectBId);
+            Assert.NotNull(NeighboringObjectlinkA);
+
+
         }
     }
 }

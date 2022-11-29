@@ -29,7 +29,5 @@ namespace GeoObjectModel.Domain
         public Guid NeighboringGeographicalObjectAId { get; set; }
         public GeographicalObject NeighborningGeographicalObjectsLinkB { get; set; } = null!;
         public Guid NeighboringGeographicalObjectBId { get; set; }
-
-
     }
 }
